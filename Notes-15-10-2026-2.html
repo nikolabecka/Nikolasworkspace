@@ -1,0 +1,1495 @@
+<html>
+        <head><title>Downloaded HTML</title></head>
+        <body>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikola's Workspace & Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastel: {
+                            pink: '#fde2e4',
+                            peach: '#ffcad4',
+                            lavender: '#e2ece9',
+                            sky: '#bee1e6',
+                            mint: '#cddafd',
+                            yellow: '#fff1e6',
+                            purple: '#dfe7fd',
+                            rose: '#f0efeb'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .canvas-container {
+            touch-action: none;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-700 bg-slate-50 flex flex-col">
+
+    <!-- TOP HEADER / SEARCH & GEMINI SHORTCUT -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 px-4 py-3 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-pink-300 via-purple-300 to-sky-300 flex items-center justify-center font-bold text-slate-800 shadow-sm">
+                        N
+                    </div>
+                    <div>
+                        <h1 class="text-base font-bold text-slate-800 leading-tight">Nikola's Workspace</h1>
+                        <p class="text-xs text-slate-400">Personal Dashboard & Creator Hub</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEARCH BAR & GEMINI SHORTCUT -->
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+                <div class="relative flex-1 sm:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" id="global-search" placeholder="Search tasks, projects, notes..." class="w-full pl-9 pr-4 py-2 bg-slate-100 focus:bg-white text-xs text-slate-700 rounded-xl border border-transparent focus:border-purple-300 focus:outline-none transition-all">
+                </div>
+                <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="px-3 py-2 bg-gradient-to-r from-purple-100 via-pink-100 to-sky-100 hover:from-purple-200 hover:to-sky-200 border border-purple-200/60 rounded-xl text-slate-700 text-xs font-semibold flex items-center gap-2 transition-all shadow-sm shrink-0">
+                    <i class="fa-solid fa-sparkles text-purple-500"></i>
+                    <span>Gemini</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS (Strict Required Order: Home Page, Add a Project, Task, Notebook, N's Settings) -->
+    <nav class="bg-white border-b border-slate-200 px-4">
+        <div class="max-w-7xl mx-auto flex items-center gap-1 overflow-x-auto py-2 no-scrollbar">
+            <button data-target="tab-home" class="nav-tab active-tab flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all bg-purple-100 text-purple-800 border border-purple-200">
+                <i class="fa-solid fa-house text-purple-600"></i> Home Page
+            </button>
+            <button data-target="tab-add-project" class="nav-tab flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all">
+                <i class="fa-solid fa-folder-plus text-sky-500"></i> Add a Project
+            </button>
+            <button data-target="tab-task" class="nav-tab flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all">
+                <i class="fa-solid fa-list-check text-emerald-500"></i> Task
+            </button>
+            <button data-target="tab-notebook" class="nav-tab flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all">
+                <i class="fa-solid fa-book-open text-amber-500"></i> Notebook
+            </button>
+            <button data-target="tab-settings" class="nav-tab flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap transition-all">
+                <i class="fa-solid fa-gear text-rose-500"></i> N's Settings
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN PAGE CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
+
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <div id="tab-home" class="tab-content space-y-6">
+            
+            <!-- TOP STATS CARDS GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                
+                <!-- UP NEXT BOX (Fully Editable Tasks + Due Dates) -->
+                <div class="bg-gradient-to-br from-pink-50 to-purple-50 p-5 rounded-3xl border border-pink-100 shadow-sm flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-pink-500"></i> Up Next
+                        </h2>
+                        <button id="add-upnext-btn" class="px-2 py-1 bg-white hover:bg-pink-100 text-pink-600 rounded-lg text-xs font-semibold border border-pink-200 transition-all">
+                            + Add Item
+                        </button>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-3">Tasks scheduled for immediate focus:</p>
+                    <div id="upnext-container" class="space-y-2 flex-1 overflow-y-auto max-h-52 pr-1">
+                        <!-- Dynamic Up Next Items -->
+                    </div>
+                </div>
+
+                <!-- RECENT UPDATE BOX -->
+                <div class="bg-gradient-to-br from-sky-50 to-blue-50 p-5 rounded-3xl border border-sky-100 shadow-sm flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-sky-500"></i> Recent Updates
+                        </h2>
+                        <span class="text-[10px] bg-sky-200 text-sky-800 px-2 py-0.5 rounded-full font-bold">Live Feed</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-3">Activity log across projects & tasks:</p>
+                    <div id="updates-log-container" class="space-y-2 flex-1 overflow-y-auto max-h-52 pr-1 text-xs">
+                        <!-- Dynamic activity logs -->
+                    </div>
+                </div>
+
+                <!-- MY PROGRESS BOX -->
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-5 rounded-3xl border border-emerald-100 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-line text-emerald-500"></i> My Progress
+                            </h2>
+                            <span id="progress-percentage-badge" class="text-xs bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded-full font-bold">0%</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mb-4">Overall completion calculated across all tasks & projects:</p>
+                        
+                        <div class="w-full bg-white/80 rounded-full h-4 p-0.5 border border-emerald-200 mb-4">
+                            <div id="progress-bar-fill" class="bg-gradient-to-r from-emerald-400 to-teal-500 h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                        <div class="bg-white/80 p-2 rounded-xl border border-emerald-100">
+                            <span class="block text-slate-400 text-[10px]">Total Tasks</span>
+                            <span id="total-tasks-count" class="font-bold text-slate-800 text-sm">0</span>
+                        </div>
+                        <div class="bg-white/80 p-2 rounded-xl border border-emerald-100">
+                            <span class="block text-slate-400 text-[10px]">Completed</span>
+                            <span id="completed-tasks-count" class="font-bold text-emerald-600 text-sm">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOG AN UPDATE BAR -->
+            <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                <h2 class="text-sm font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square text-purple-500"></i> Log an Update
+                </h2>
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <input type="text" id="log-update-input" placeholder="Type a note or activity update for the homepage feed..." class="flex-1 px-4 py-2.5 bg-slate-50 text-xs border border-slate-200 rounded-xl focus:outline-none focus:border-purple-300">
+                    <button id="submit-update-btn" class="px-5 py-2.5 bg-purple-500 hover:bg-purple-600 text-white font-semibold text-xs rounded-xl shadow-sm transition-all shrink-0">
+                        Log Update
+                    </button>
+                </div>
+            </div>
+
+            <!-- PROJECT FOLDERS OVERVIEW QUICK DASHBOARD -->
+            <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-brands fa-google-drive text-amber-500"></i> Active Project Folders
+                    </h2>
+                    <span class="text-xs text-slate-400">Google Drive Subfolders</span>
+                </div>
+                <div id="home-projects-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <!-- Dynamic project cards -->
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ================= PAGE 2: ADD A PROJECT ================= -->
+        <div id="tab-add-project" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm max-w-4xl mx-auto">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-folder-plus text-sky-500"></i> Create New Project
+                    </h2>
+                    <p class="text-xs text-slate-500">Fill in details to structure your project and automatically link Google Drive subfolders.</p>
+                </div>
+
+                <form id="project-form" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Project Name -->
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-700">Project Name *</label>
+                            <input type="text" id="proj-name" required placeholder="e.g., Autumn Portfolio" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-sky-400">
+                        </div>
+
+                        <!-- Due Date -->
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-700">Due Date *</label>
+                            <input type="date" id="proj-date" required class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-sky-400">
+                        </div>
+
+                        <!-- Status -->
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-700">Status *</label>
+                            <select id="proj-status" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-sky-400">
+                                <option value="Planning">Planning</option>
+                                <option value="Building">Building</option>
+                                <option value="Publish">Publish</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- The Summary -->
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-700">The Summary</label>
+                        <textarea id="proj-summary" rows="3" placeholder="Brief outline of the project goals..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-sky-400"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Who is It For -->
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-700">Who is It For</label>
+                            <input type="text" id="proj-target" placeholder="e.g., Classroom, Personal, Client" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-sky-400">
+                        </div>
+
+                        <!-- The Materials -->
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-700">The Materials</label>
+                            <input type="text" id="proj-materials" placeholder="e.g., Figma, HTML/JS, Canvas, Markers" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-sky-400">
+                        </div>
+                    </div>
+
+                    <!-- Project Folder Link -->
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-700">Project Folder Link (Google Drive URL)</label>
+                        <div class="flex gap-2">
+                            <input type="url" id="proj-drive-url" placeholder="https://drive.google.com/drive/folders/..." class="flex-1 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-sky-400">
+                            <button type="button" id="auto-drive-btn" class="px-3 py-2 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-xl text-xs font-semibold transition-all flex items-center gap-1">
+                                <i class="fa-brands fa-google-drive"></i> Auto-Generate Subfolder
+                            </button>
+                        </div>
+                        <p class="text-[10px] text-slate-400">Paste an existing Drive link, or click Auto-Generate to construct a target subfolder location under your main drive link.</p>
+                    </div>
+
+                    <div class="pt-3">
+                        <button type="submit" class="w-full py-3 bg-sky-400 hover:bg-sky-500 text-white font-bold text-xs rounded-xl shadow-md transition-all">
+                            Save Project & Register Workspace Subfolder
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- ================= PAGE 3: TASK PAGE ================= -->
+        <div id="tab-task" class="tab-content hidden space-y-6">
+            <!-- TASK CREATION BAR -->
+            <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                <h2 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle text-emerald-500"></i> Add New Task
+                </h2>
+                <form id="add-task-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                    <input type="text" id="task-name-input" required placeholder="Task Name..." class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-emerald-400">
+                    
+                    <select id="task-project-select" class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-emerald-400">
+                        <option value="General">General Project</option>
+                    </select>
+
+                    <input type="date" id="task-date-input" required class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-emerald-400">
+
+                    <select id="task-status-select" class="px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-emerald-400">
+                        <option value="Planning">Planning</option>
+                        <option value="Building">Building</option>
+                        <option value="Publish">Publish</option>
+                        <option value="Help">Help</option>
+                        <option value="Stuck">Stuck</option>
+                        <option value="Extra Help">Extra Help</option>
+                    </select>
+
+                    <button type="submit" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl transition-all shadow-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Add To Do
+                    </button>
+                </form>
+            </div>
+
+            <!-- TWO SIDE-BY-SIDE COLUMNS: TO DO & DONE -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- TO DO BOX -->
+                <div class="bg-amber-50/50 p-5 rounded-3xl border border-amber-200/80 shadow-sm flex flex-col min-h-[400px]">
+                    <div class="flex items-center justify-between mb-4 border-b border-amber-200/60 pb-3">
+                        <h3 class="text-sm font-bold text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-list text-amber-600"></i> To Do List
+                        </h3>
+                        <span id="todo-count-badge" class="px-2 py-0.5 bg-amber-200 text-amber-900 rounded-full text-xs font-bold">0</span>
+                    </div>
+                    <div id="todo-tasks-list" class="space-y-3 flex-1 overflow-y-auto max-h-[500px] pr-1">
+                        <!-- Dynamic todo items -->
+                    </div>
+                </div>
+
+                <!-- DONE BOX -->
+                <div class="bg-emerald-50/50 p-5 rounded-3xl border border-emerald-200/80 shadow-sm flex flex-col min-h-[400px]">
+                    <div class="flex items-center justify-between mb-4 border-b border-emerald-200/60 pb-3">
+                        <h3 class="text-sm font-bold text-emerald-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Done
+                        </h3>
+                        <span id="done-count-badge" class="px-2 py-0.5 bg-emerald-200 text-emerald-900 rounded-full text-xs font-bold">0</span>
+                    </div>
+                    <div id="done-tasks-list" class="space-y-3 flex-1 overflow-y-auto max-h-[500px] pr-1">
+                        <!-- Dynamic done items -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ================= PAGE 4: NOTEBOOK ================= -->
+        <div id="tab-notebook" class="tab-content hidden space-y-6">
+            
+            <!-- TOP ROW: QUICK BOX & DOODLE PAD -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- QUICK BOX (Auto-saving text note) -->
+                <div class="lg:col-span-4 bg-amber-50 p-5 rounded-3xl border border-amber-200 shadow-sm flex flex-col">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-sm font-bold text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-note-sticky text-amber-500"></i> Quick Box
+                        </h3>
+                        <span class="text-[10px] text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full font-semibold">Auto-saved</span>
+                    </div>
+                    <p class="text-xs text-amber-700/80 mb-3">Jot down scratchpad thoughts, reminders, or snippets:</p>
+                    <textarea id="quick-box-textarea" rows="14" placeholder="Type quick notes here..." class="w-full flex-1 p-3.5 bg-white border border-amber-200 rounded-2xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-300 resize-none shadow-inner"></textarea>
+                </div>
+
+                <!-- DOODLE PAD (PRECISION CANVAS WITH SMOOTHING & HIGH-DPI) -->
+                <div class="lg:col-span-8 bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-3">
+                        <div>
+                            <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-paint-brush text-purple-500"></i> Smooth Doodle Pad
+                            </h3>
+                            <p class="text-xs text-slate-400">High-DPI precision drawing, vector shapes, & color palette.</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="clear-canvas-btn" class="px-3 py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-700 text-xs font-semibold rounded-xl transition-all">
+                                <i class="fa-solid fa-trash-can"></i> Clear
+                            </button>
+                            <button id="download-canvas-btn" class="px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-700 text-xs font-semibold rounded-xl transition-all">
+                                <i class="fa-solid fa-download"></i> Save Image
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TOOLBAR CONTROLS -->
+                    <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-3 mb-3">
+                        <!-- Tools & Shapes Selection -->
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="text-xs font-bold text-slate-600">Mode:</span>
+                            <button data-tool="pen" class="tool-btn active-tool-btn px-3 py-1 bg-purple-500 text-white rounded-lg text-xs font-semibold shadow-sm transition-all">Pen</button>
+                            <button data-tool="eraser" class="tool-btn px-3 py-1 bg-white border border-slate-200 text-slate-600 rounded-lg text-xs font-semibold hover:bg-slate-100 transition-all">Eraser</button>
+
+                            <div class="h-4 w-[1px] bg-slate-300 mx-1"></div>
+
+                            <span class="text-xs font-bold text-slate-600">Shapes:</span>
+                            <select id="shape-selector" class="bg-white border border-slate-200 text-slate-700 text-xs rounded-lg p-1.5 focus:outline-none focus:border-purple-300">
+                                <option value="none">Freehand Drawing</option>
+                                <option value="triangle">Triangle</option>
+                                <option value="circle">Circle</option>
+                                <option value="rectangle">Rectangle</option>
+                                <option value="square">Square</option>
+                                <option value="hexagon">Hexagon</option>
+                                <option value="octagon">Octagon</option>
+                                <option value="trapezoid">Trapezoid</option>
+                                <option value="star">Star</option>
+                                <option value="heart">Heart</option>
+                                <option value="flower">Flower</option>
+                            </select>
+                        </div>
+
+                        <!-- Swatches & Size Slider -->
+                        <div class="flex flex-wrap items-center gap-3">
+                            <!-- Rainbow Swatches + Black, Brown, Pink, Grey -->
+                            <div class="flex items-center gap-1">
+                                <input type="color" id="canvas-color-picker" value="#334155" class="w-6 h-6 rounded cursor-pointer border-0 bg-transparent p-0" title="Custom Color">
+                                <button data-color="#000000" class="color-swatch w-4 h-4 rounded-full bg-black border border-white shadow-sm transition-transform hover:scale-125" title="Black"></button>
+                                <button data-color="#ef4444" class="color-swatch w-4 h-4 rounded-full bg-red-500 border border-white shadow-sm transition-transform hover:scale-125" title="Red"></button>
+                                <button data-color="#f97316" class="color-swatch w-4 h-4 rounded-full bg-orange-500 border border-white shadow-sm transition-transform hover:scale-125" title="Orange"></button>
+                                <button data-color="#eab308" class="color-swatch w-4 h-4 rounded-full bg-yellow-500 border border-white shadow-sm transition-transform hover:scale-125" title="Yellow"></button>
+                                <button data-color="#22c55e" class="color-swatch w-4 h-4 rounded-full bg-green-500 border border-white shadow-sm transition-transform hover:scale-125" title="Green"></button>
+                                <button data-color="#06b6d4" class="color-swatch w-4 h-4 rounded-full bg-cyan-500 border border-white shadow-sm transition-transform hover:scale-125" title="Cyan"></button>
+                                <button data-color="#3b82f6" class="color-swatch w-4 h-4 rounded-full bg-blue-500 border border-white shadow-sm transition-transform hover:scale-125" title="Blue"></button>
+                                <button data-color="#a855f7" class="color-swatch w-4 h-4 rounded-full bg-purple-500 border border-white shadow-sm transition-transform hover:scale-125" title="Purple"></button>
+                                <button data-color="#ec4899" class="color-swatch w-4 h-4 rounded-full bg-pink-400 border border-white shadow-sm transition-transform hover:scale-125" title="Pink"></button>
+                                <button data-color="#78350f" class="color-swatch w-4 h-4 rounded-full bg-amber-900 border border-white shadow-sm transition-transform hover:scale-125" title="Brown"></button>
+                                <button data-color="#64748b" class="color-swatch w-4 h-4 rounded-full bg-slate-500 border border-white shadow-sm transition-transform hover:scale-125" title="Grey"></button>
+                            </div>
+
+                            <div class="flex items-center gap-1.5 border-l border-slate-200 pl-3">
+                                <span class="text-xs font-bold text-slate-600">Size:</span>
+                                <input type="range" id="canvas-brush-size" min="1" max="50" value="4" class="w-16 accent-purple-500">
+                                <span id="brush-size-label" class="text-xs font-mono text-slate-500 w-4">4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CANVAS WRAPPER -->
+                    <div id="canvas-container" class="relative w-full h-[320px] bg-white rounded-2xl border-2 border-dashed border-slate-200 overflow-hidden cursor-crosshair shadow-inner">
+                        <canvas id="doodle-canvas" class="w-full h-full block touch-none"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECOND ROW: FUTURE PROJECT IDEAS & WHY IS IT GOOD? -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- FUTURE PROJECT IDEAS -->
+                <div class="bg-purple-50/60 p-5 rounded-3xl border border-purple-100 shadow-sm">
+                    <h3 class="text-sm font-bold text-purple-900 mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-purple-500"></i> Future Project Ideas
+                    </h3>
+                    <textarea id="future-ideas-textarea" rows="4" placeholder="Brainstorm ideas for future builds, games, or artwork..." class="w-full p-3 bg-white border border-purple-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-300"></textarea>
+                </div>
+
+                <!-- WHY IS IT GOOD? -->
+                <div class="bg-pink-50/60 p-5 rounded-3xl border border-pink-100 shadow-sm">
+                    <h3 class="text-sm font-bold text-pink-900 mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-heart text-pink-500"></i> Why is It Good?
+                    </h3>
+                    <textarea id="why-good-textarea" rows="4" placeholder="List the potential benefits, key features, or motivations..." class="w-full p-3 bg-white border border-pink-200 rounded-xl text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-pink-300"></textarea>
+                </div>
+            </div>
+
+            <!-- FLAPPY BIRD MINI-GAME (Starts ONLY on Start Click or Spacebar) -->
+            <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 shadow-lg text-white">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                        <h3 class="text-base font-bold flex items-center gap-2 text-sky-400">
+                            <i class="fa-solid fa-kiwi-bird"></i> Notebook Arcade: Flappy Bird
+                        </h3>
+                        <p class="text-xs text-slate-400">Click "Start Game" or press Spacebar to flap!</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-xs bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-700 font-mono">
+                            Score: <span id="fb-score" class="text-amber-400 font-bold">0</span> | High: <span id="fb-high" class="text-emerald-400 font-bold">0</span>
+                        </div>
+                        <button id="fb-start-btn" class="px-4 py-2 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-slate-900 font-bold text-xs rounded-xl shadow-md transition-all">
+                            Start Game
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative w-full max-w-xl mx-auto h-[300px] bg-sky-300 rounded-2xl overflow-hidden shadow-inner border border-sky-400">
+                    <canvas id="flappy-canvas" class="w-full h-full block"></canvas>
+                    <div id="fb-overlay" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm flex flex-col items-center justify-center p-4 text-center">
+                        <div class="w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center mb-2 shadow-lg animate-bounce">
+                            <i class="fa-solid fa-kiwi-bird text-slate-900 text-xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-1">Flappy Bird Arcade</h4>
+                        <p class="text-xs text-slate-300 mb-4 max-w-xs">Press the Start button below or hit Spacebar to jump and begin flying!</p>
+                        <button id="fb-overlay-start" class="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs rounded-xl shadow-lg transition-all">
+                            Start Flying
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ================= PAGE 5: N'S SETTINGS ================= -->
+        <div id="tab-settings" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm max-w-3xl mx-auto">
+                <div class="border-b border-slate-100 pb-4 mb-6">
+                    <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-gear text-rose-500"></i> N's Settings & Workspace Control
+                    </h2>
+                    <p class="text-xs text-slate-500">Manage global storage, Google Drive integration, and website sharing.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Google Drive Main Directory Link -->
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <label class="text-xs font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fa-brands fa-google-drive text-amber-500 text-sm"></i> Main Google Drive Folder URL
+                        </label>
+                        <div class="flex gap-2">
+                            <input type="url" id="settings-main-drive" placeholder="https://drive.google.com/drive/my-drive" class="flex-1 px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-rose-400">
+                            <button id="save-settings-drive-btn" class="px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs rounded-xl transition-all">
+                                Save Link
+                            </button>
+                        </div>
+                        <p class="text-[10px] text-slate-400">All newly generated project subfolders will default under this root folder structure.</p>
+                    </div>
+
+                    <!-- Share Website Box -->
+                    <div class="p-4 bg-purple-50 rounded-2xl border border-purple-100 space-y-2">
+                        <label class="text-xs font-bold text-purple-900 flex items-center gap-2">
+                            <i class="fa-solid fa-share-nodes text-purple-500"></i> Share Website
+                        </label>
+                        <div class="flex gap-2">
+                            <input type="text" id="share-link-input" readonly value="" class="flex-1 px-3.5 py-2 bg-white border border-purple-200 rounded-xl text-xs font-mono text-slate-600 focus:outline-none">
+                            <button id="copy-share-btn" class="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-1 shrink-0">
+                                <i class="fa-solid fa-copy"></i> Copy Link
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Local Storage Reset -->
+                    <div class="p-4 bg-rose-50 rounded-2xl border border-rose-100 flex items-center justify-between gap-4">
+                        <div>
+                            <h4 class="text-xs font-bold text-rose-900">Reset Local Workspace Data</h4>
+                            <p class="text-[10px] text-rose-600">Clears saved tasks, doodle pad canvas, notes, and local settings back to defaults.</p>
+                        </div>
+                        <button id="reset-workspace-btn" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition-all shrink-0">
+                            Reset All Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-400 mt-auto">
+        Nikola's Workspace & Dashboard &copy; 2026 | All features active & local storage backed.
+    </footer>
+
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // --- GLOBAL APP STATE & LOCAL STORAGE INITIALIZATION ---
+        const DEFAULT_STATE = {
+            upNext: [
+                { id: '1', title: 'Complete Pastel Dashboard UI', date: '2026-10-18', done: false },
+                { id: '2', title: 'Review Google Drive Subfolders', date: '2026-10-20', done: false }
+            ],
+            recentUpdates: [
+                'Workspace initialized in Pastel Theme.',
+                'Notebook Quick Box & Doodle Pad active.'
+            ],
+            projects: [
+                {
+                    id: 'p1',
+                    name: 'Pastel Hub Website',
+                    date: '2026-11-01',
+                    status: 'Building',
+                    summary: 'Personal portfolio dashboard with 5 tabs and doodle canvas.',
+                    target: 'Self',
+                    materials: 'HTML, JS, Tailwind CSS',
+                    driveUrl: 'https://drive.google.com/drive/u/0/my-drive'
+                }
+            ],
+            tasks: [
+                { id: 't1', name: 'Refine Canvas Vector Shapes', project: 'Pastel Hub Website', date: '2026-10-15', status: 'Building', done: false },
+                { id: 't2', name: 'Test Google Drive Links', project: 'Pastel Hub Website', date: '2026-10-16', status: 'Planning', done: true }
+            ],
+            quickNotes: '',
+            futureIdeas: '',
+            whyGood: '',
+            mainDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
+            flappyHighScore: 0
+        };
+
+        let state = JSON.parse(localStorage.getItem('nikola_workspace_state')) || DEFAULT_STATE;
+
+        function saveState() {
+            localStorage.setItem('nikola_workspace_state', JSON.stringify(state));
+            renderAll();
+        }
+
+        // --- NAVIGATION ENGINE ---
+        const tabs = document.querySelectorAll('.nav-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetId = tab.dataset.target;
+
+                tabs.forEach(t => {
+                    t.classList.remove('active-tab', 'bg-purple-100', 'text-purple-800', 'border', 'border-purple-200');
+                    t.classList.add('text-slate-600', 'hover:bg-slate-100');
+                });
+
+                tab.classList.add('active-tab', 'bg-purple-100', 'text-purple-800', 'border', 'border-purple-200');
+                tab.classList.remove('text-slate-600', 'hover:bg-slate-100');
+
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                    if (content.id === targetId) {
+                        content.classList.remove('hidden');
+                    }
+                });
+
+                // Re-trigger Canvas resolution setup when navigating to Notebook
+                if (targetId === 'tab-notebook') {
+                    setTimeout(() => {
+                        setupCanvasResolution();
+                        resizeFlappyCanvas();
+                    }, 50);
+                }
+            });
+        });
+
+
+        // --- PAGE 1: HOME PAGE LOGIC ---
+        function renderHome() {
+            // Render Up Next
+            const upNextContainer = document.getElementById('upnext-container');
+            if (upNextContainer) {
+                upNextContainer.innerHTML = '';
+                if (state.upNext.length === 0) {
+                    upNextContainer.innerHTML = '<p class="text-xs text-slate-400 italic">No upcoming items. Click + Add Item above!</p>';
+                } else {
+                    state.upNext.forEach((item, index) => {
+                        const div = document.createElement('div');
+                        div.className = 'flex items-center gap-2 p-2 bg-white rounded-xl border border-pink-100 shadow-2xs text-xs';
+                        div.innerHTML = `
+                            <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleUpNextDone(${index})" class="rounded text-pink-500 focus:ring-pink-400">
+                            <input type="text" value="${escapeHtml(item.title)}" onchange="updateUpNextTitle(${index}, this.value)" class="flex-1 bg-transparent font-medium ${item.done ? 'line-through text-slate-400' : 'text-slate-700'} focus:outline-none">
+                            <input type="date" value="${item.date}" onchange="updateUpNextDate(${index}, this.value)" class="bg-slate-50 border border-slate-200 rounded px-1.5 py-0.5 text-[10px] text-slate-500">
+                            <button onclick="deleteUpNext(${index})" class="text-slate-300 hover:text-rose-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
+                        `;
+                        upNextContainer.appendChild(div);
+                    });
+                }
+            }
+
+            // Render Recent Updates
+            const updatesContainer = document.getElementById('updates-log-container');
+            if (updatesContainer) {
+                updatesContainer.innerHTML = '';
+                state.recentUpdates.slice().reverse().forEach(log => {
+                    const div = document.createElement('div');
+                    div.className = 'p-2 bg-white rounded-xl border border-sky-100 flex items-center gap-2 text-slate-600';
+                    div.innerHTML = `<i class="fa-solid fa-angle-right text-sky-400 text-[10px]"></i> <span>${escapeHtml(log)}</span>`;
+                    updatesContainer.appendChild(div);
+                });
+            }
+
+            // Render Progress & Stats
+            const totalTasks = state.tasks.length;
+            const completedTasks = state.tasks.filter(t => t.done).length;
+            const percentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+            document.getElementById('total-tasks-count').textContent = totalTasks;
+            document.getElementById('completed-tasks-count').textContent = completedTasks;
+            document.getElementById('progress-percentage-badge').textContent = `${percentage}%`;
+            document.getElementById('progress-bar-fill').style.width = `${percentage}%`;
+
+            // Render Active Projects on Home
+            const homeProjectsList = document.getElementById('home-projects-list');
+            if (homeProjectsList) {
+                homeProjectsList.innerHTML = '';
+                if (state.projects.length === 0) {
+                    homeProjectsList.innerHTML = '<p class="text-xs text-slate-400 italic">No projects created yet.</p>';
+                } else {
+                    state.projects.forEach(p => {
+                        const div = document.createElement('div');
+                        div.className = 'p-3.5 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col justify-between hover:border-purple-300 transition-all';
+                        div.innerHTML = `
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="font-bold text-xs text-slate-800">${escapeHtml(p.name)}</h4>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold ${getStatusBadgeClass(p.status)}">${p.status}</span>
+                                </div>
+                                <p class="text-[11px] text-slate-500 line-clamp-2 mb-2">${escapeHtml(p.summary || 'No summary provided.')}</p>
+                            </div>
+                            <a href="${p.driveUrl}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-amber-700 font-semibold hover:underline flex items-center gap-1">
+                                <i class="fa-brands fa-google-drive"></i> Open Drive Folder
+                            </a>
+                        `;
+                        homeProjectsList.appendChild(div);
+                    });
+                }
+            }
+        }
+
+        // Up Next Global Handlers
+        window.toggleUpNextDone = function(index) {
+            state.upNext[index].done = !state.upNext[index].done;
+            saveState();
+        };
+        window.updateUpNextTitle = function(index, value) {
+            state.upNext[index].title = value;
+            saveState();
+        };
+        window.updateUpNextDate = function(index, value) {
+            state.upNext[index].date = value;
+            saveState();
+        };
+        window.deleteUpNext = function(index) {
+            state.upNext.splice(index, 1);
+            saveState();
+        };
+
+        document.getElementById('add-upnext-btn')?.addEventListener('click', () => {
+            const today = new Date().toISOString().split('T')[0];
+            state.upNext.push({ id: Date.now().toString(), title: 'New Scheduled Item', date: today, done: false });
+            saveState();
+        });
+
+        document.getElementById('submit-update-btn')?.addEventListener('click', () => {
+            const input = document.getElementById('log-update-input');
+            if (input && input.value.trim()) {
+                state.recentUpdates.push(input.value.trim());
+                input.value = '';
+                saveState();
+            }
+        });
+
+
+        // --- PAGE 2: ADD A PROJECT LOGIC ---
+        const projectForm = document.getElementById('project-form');
+        if (projectForm) {
+            projectForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('proj-name').value;
+                const date = document.getElementById('proj-date').value;
+                const status = document.getElementById('proj-status').value;
+                const summary = document.getElementById('proj-summary').value;
+                const target = document.getElementById('proj-target').value;
+                const materials = document.getElementById('proj-materials').value;
+                let driveUrl = document.getElementById('proj-drive-url').value;
+
+                if (!driveUrl) {
+                    const sanitized = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                    driveUrl = `${state.mainDriveUrl}?subfolder=${sanitized}`;
+                }
+
+                const newProj = {
+                    id: 'p_' + Date.now(),
+                    name,
+                    date,
+                    status,
+                    summary,
+                    target,
+                    materials,
+                    driveUrl
+                };
+
+                state.projects.push(newProj);
+                state.recentUpdates.push(`Created new project folder: "${name}"`);
+                saveState();
+
+                projectForm.reset();
+                alert(`Project "${name}" created successfully and synced to Google Drive subfolder!`);
+            });
+        }
+
+        document.getElementById('auto-drive-btn')?.addEventListener('click', () => {
+            const nameInput = document.getElementById('proj-name').value;
+            const driveInput = document.getElementById('proj-drive-url');
+            if (nameInput) {
+                const sanitized = nameInput.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                driveInput.value = `${state.mainDriveUrl}?subfolder=${sanitized}`;
+            } else {
+                alert('Please enter a Project Name first to auto-generate a subfolder link.');
+            }
+        });
+
+
+        // --- PAGE 3: TASK PAGE LOGIC ---
+        function renderTasks() {
+            // Populate project select dropdown
+            const projSelect = document.getElementById('task-project-select');
+            if (projSelect) {
+                const currentVal = projSelect.value;
+                projSelect.innerHTML = '<option value="General">General Project</option>';
+                state.projects.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p.name;
+                    opt.textContent = p.name;
+                    projSelect.appendChild(opt);
+                });
+                projSelect.value = currentVal || 'General';
+            }
+
+            const todoList = document.getElementById('todo-tasks-list');
+            const doneList = document.getElementById('done-tasks-list');
+
+            if (todoList && doneList) {
+                todoList.innerHTML = '';
+                doneList.innerHTML = '';
+
+                let todoCount = 0;
+                let doneCount = 0;
+
+                state.tasks.forEach((task, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'p-3 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2';
+                    
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between gap-2">
+                            <input type="text" value="${escapeHtml(task.name)}" onchange="updateTaskName(${idx}, this.value)" class="font-bold text-xs text-slate-800 bg-transparent flex-1 focus:outline-none focus:border-b border-purple-300">
+                            <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold ${getStatusBadgeClass(task.status)}">${task.status}</span>
+                        </div>
+
+                        <div class="flex items-center justify-between text-[11px] text-slate-500">
+                            <span><i class="fa-solid fa-folder text-amber-400 mr-1"></i> ${escapeHtml(task.project)}</span>
+                            <span><i class="fa-regular fa-calendar mr-1"></i> ${task.date}</span>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-100 mt-1">
+                            <select onchange="updateTaskStatus(${idx}, this.value)" class="bg-slate-50 border border-slate-200 text-[10px] rounded-lg p-1">
+                                <option value="Planning" ${task.status === 'Planning' ? 'selected' : ''}>Planning</option>
+                                <option value="Building" ${task.status === 'Building' ? 'selected' : ''}>Building</option>
+                                <option value="Publish" ${task.status === 'Publish' ? 'selected' : ''}>Publish</option>
+                                <option value="Help" ${task.status === 'Help' ? 'selected' : ''}>Help</option>
+                                <option value="Stuck" ${task.status === 'Stuck' ? 'selected' : ''}>Stuck</option>
+                                <option value="Extra Help" ${task.status === 'Extra Help' ? 'selected' : ''}>Extra Help</option>
+                            </select>
+
+                            <div class="flex items-center gap-2">
+                                <button onclick="toggleTaskDone(${idx})" class="px-2 py-1 ${task.done ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'} rounded-lg text-[10px] font-semibold transition-all">
+                                    ${task.done ? 'Mark To Do' : 'Mark Done'}
+                                </button>
+                                <button onclick="deleteTask(${idx})" class="text-slate-300 hover:text-rose-500 px-1 text-xs">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    if (task.done) {
+                        doneCount++;
+                        doneList.appendChild(card);
+                    } else {
+                        todoCount++;
+                        todoList.appendChild(card);
+                    }
+                });
+
+                document.getElementById('todo-count-badge').textContent = todoCount;
+                document.getElementById('done-count-badge').textContent = doneCount;
+            }
+        }
+
+        window.updateTaskName = function(idx, val) {
+            state.tasks[idx].name = val;
+            saveState();
+        };
+        window.updateTaskStatus = function(idx, val) {
+            state.tasks[idx].status = val;
+            saveState();
+        };
+        window.toggleTaskDone = function(idx) {
+            state.tasks[idx].done = !state.tasks[idx].done;
+            state.recentUpdates.push(`Task "${state.tasks[idx].name}" marked as ${state.tasks[idx].done ? 'Done' : 'To Do'}`);
+            saveState();
+        };
+        window.deleteTask = function(idx) {
+            state.tasks.splice(idx, 1);
+            saveState();
+        };
+
+        document.getElementById('add-task-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('task-name-input').value;
+            const project = document.getElementById('task-project-select').value;
+            const date = document.getElementById('task-date-input').value;
+            const status = document.getElementById('task-status-select').value;
+
+            state.tasks.push({
+                id: 't_' + Date.now(),
+                name,
+                project,
+                date,
+                status,
+                done: false
+            });
+
+            state.recentUpdates.push(`Added task: "${name}"`);
+            saveState();
+            document.getElementById('task-name-input').value = '';
+        });
+
+
+        // --- PAGE 4: NOTEBOOK & HIGH-DPI SMOOTH DOODLE PAD ---
+        const canvas = document.getElementById('doodle-canvas');
+        const ctx = canvas.getContext('2d');
+        const canvasContainer = document.getElementById('canvas-container');
+
+        let isDrawing = false;
+        let currentTool = 'pen'; // 'pen' | 'eraser'
+        let currentShape = 'none';
+        let brushColor = '#334155';
+        let brushSize = 4;
+        let points = [];
+        let dpr = window.devicePixelRatio || 1;
+
+        // High-DPI Resolution setup & persistent state preservation
+        function setupCanvasResolution() {
+            if (!canvasContainer || !canvas) return;
+            const rect = canvasContainer.getBoundingClientRect();
+            dpr = window.devicePixelRatio || 1;
+
+            // Preserve canvas bitmap data before resizing container
+            let tempCanvas = document.createElement('canvas');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            let tempCtx = tempCanvas.getContext('2d');
+            if (canvas.width > 0 && canvas.height > 0) {
+                tempCtx.drawImage(canvas, 0, 0);
+            }
+
+            // Set dynamic canvas internal resolution
+            canvas.width = Math.floor(rect.width * dpr);
+            canvas.height = Math.floor(rect.height * dpr);
+
+            // Set CSS display dimensions
+            canvas.style.width = `${rect.width}px`;
+            canvas.style.height = `${rect.height}px`;
+
+            // Reset matrix scale & line style quality
+            ctx.scale(dpr, dpr);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // Restore canvas contents or state from local storage
+            if (tempCanvas.width > 0 && tempCanvas.height > 0) {
+                ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width / dpr, tempCanvas.height / dpr);
+            } else {
+                restoreCanvasFromStorage();
+            }
+        }
+
+        function saveCanvasToStorage() {
+            try {
+                localStorage.setItem('nikola_doodle_data', canvas.toDataURL());
+            } catch (e) {
+                console.warn('LocalStorage canvas dump skipped: ', e);
+            }
+        }
+
+        function restoreCanvasFromStorage() {
+            const savedData = localStorage.getItem('nikola_doodle_data');
+            if (savedData) {
+                const img = new Image();
+                img.onload = () => {
+                    ctx.save();
+                    ctx.setTransform(1, 0, 0, 1, 0, 0); // Temporary identity reset for rendering image
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    ctx.restore();
+                };
+                img.src = savedData;
+            }
+        }
+
+        function getPointerPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            let clientX = e.clientX;
+            let clientY = e.clientY;
+
+            if (e.touches && e.touches.length > 0) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            }
+
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            e.preventDefault();
+            isDrawing = true;
+            const pos = getPointerPos(e);
+
+            if (currentShape !== 'none') {
+                drawShapeStamp(pos.x, pos.y, currentShape, brushSize * 5, brushColor);
+                saveCanvasToStorage();
+                isDrawing = false;
+                return;
+            }
+
+            points = [pos];
+        }
+
+        function draw(e) {
+            if (!isDrawing || currentShape !== 'none') return;
+            e.preventDefault();
+
+            const pos = getPointerPos(e);
+            points.push(pos);
+
+            requestAnimationFrame(() => {
+                if (points.length < 2) return;
+
+                ctx.save();
+                if (currentTool === 'eraser') {
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.strokeStyle = 'rgba(0,0,0,1)';
+                } else {
+                    ctx.globalCompositeOperation = 'source-over';
+                    ctx.strokeStyle = brushColor;
+                }
+                ctx.lineWidth = brushSize;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, points[0].y);
+
+                if (points.length === 2) {
+                    ctx.lineTo(points[1].x, points[1].y);
+                } else {
+                    // Smooth quadratic Bézier interpolation
+                    for (let i = 1; i < points.length - 1; i++) {
+                        const midX = (points[i].x + points[i + 1].x) / 2;
+                        const midY = (points[i].y + points[i + 1].y) / 2;
+                        ctx.quadraticCurveTo(points[i].x, points[i].y, midX, midY);
+                    }
+                }
+
+                ctx.stroke();
+                ctx.restore();
+            });
+        }
+
+        function stopDrawing() {
+            if (!isDrawing) return;
+            isDrawing = false;
+            points = [];
+            saveCanvasToStorage();
+        }
+
+        // Shape Vector Stamping Logic
+        function drawShapeStamp(x, y, shape, size, color) {
+            ctx.save();
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color + '33'; // Fill opacity overlay
+            ctx.lineWidth = brushSize;
+            ctx.beginPath();
+
+            const r = size / 2;
+
+            switch (shape) {
+                case 'triangle':
+                    ctx.moveTo(x, y - r);
+                    ctx.lineTo(x + r, y + r);
+                    ctx.lineTo(x - r, y + r);
+                    ctx.closePath();
+                    break;
+                case 'circle':
+                    ctx.arc(x, y, r, 0, Math.PI * 2);
+                    break;
+                case 'rectangle':
+                    ctx.rect(x - size, y - r, size * 2, size);
+                    break;
+                case 'square':
+                    ctx.rect(x - r, y - r, size, size);
+                    break;
+                case 'hexagon':
+                    for (let i = 0; i < 6; i++) {
+                        const angle = (Math.PI / 3) * i - Math.PI / 2;
+                        const px = x + r * Math.cos(angle);
+                        const py = y + r * Math.sin(angle);
+                        if (i === 0) ctx.moveTo(px, py);
+                        else ctx.lineTo(px, py);
+                    }
+                    ctx.closePath();
+                    break;
+                case 'octagon':
+                    for (let i = 0; i < 8; i++) {
+                        const angle = (Math.PI / 4) * i - Math.PI / 8;
+                        const px = x + r * Math.cos(angle);
+                        const py = y + r * Math.sin(angle);
+                        if (i === 0) ctx.moveTo(px, py);
+                        else ctx.lineTo(px, py);
+                    }
+                    ctx.closePath();
+                    break;
+                case 'trapezoid':
+                    ctx.moveTo(x - r / 2, y - r);
+                    ctx.lineTo(x + r / 2, y - r);
+                    ctx.lineTo(x + r, y + r);
+                    ctx.lineTo(x - r, y + r);
+                    ctx.closePath();
+                    break;
+                case 'star':
+                    for (let i = 0; i < 10; i++) {
+                        const rad = i % 2 === 0 ? r : r / 2;
+                        const angle = (Math.PI / 5) * i - Math.PI / 2;
+                        const px = x + rad * Math.cos(angle);
+                        const py = y + rad * Math.sin(angle);
+                        if (i === 0) ctx.moveTo(px, py);
+                        else ctx.lineTo(px, py);
+                    }
+                    ctx.closePath();
+                    break;
+                case 'heart':
+                    ctx.moveTo(x, y + r / 2);
+                    ctx.bezierCurveTo(x, y - r / 2, x - r, y - r / 2, x - r, y);
+                    ctx.bezierCurveTo(x - r, y + r / 2, x, y + r, x, y + r * 1.2);
+                    ctx.bezierCurveTo(x, y + r, x + r, y + r / 2, x + r, y);
+                    ctx.bezierCurveTo(x + r, y - r / 2, x, y - r / 2, x, y + r / 2);
+                    break;
+                case 'flower':
+                    for (let i = 0; i < 6; i++) {
+                        const angle = (Math.PI / 3) * i;
+                        const px = x + (r / 1.5) * Math.cos(angle);
+                        const py = y + (r / 1.5) * Math.sin(angle);
+                        ctx.moveTo(px + r / 2, py);
+                        ctx.arc(px, py, r / 2, 0, Math.PI * 2);
+                    }
+                    break;
+            }
+
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        // Attach Canvas Pointer Event Listeners
+        if (canvas) {
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            window.addEventListener('mouseup', stopDrawing);
+
+            canvas.addEventListener('touchstart', startDrawing, { passive: false });
+            canvas.addEventListener('touchmove', draw, { passive: false });
+            window.addEventListener('touchend', stopDrawing);
+
+            window.addEventListener('resize', setupCanvasResolution);
+        }
+
+        // Doodle Pad Control Listeners
+        document.querySelectorAll('.tool-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tool-btn').forEach(b => {
+                    b.classList.remove('active-tool-btn', 'bg-purple-500', 'text-white');
+                    b.classList.add('bg-white', 'text-slate-600');
+                });
+                btn.classList.add('active-tool-btn', 'bg-purple-500', 'text-white');
+                btn.classList.remove('bg-white', 'text-slate-600');
+                currentTool = btn.dataset.tool;
+            });
+        });
+
+        document.getElementById('shape-selector')?.addEventListener('change', (e) => {
+            currentShape = e.target.value;
+        });
+
+        document.getElementById('canvas-color-picker')?.addEventListener('input', (e) => {
+            brushColor = e.target.value;
+        });
+
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                brushColor = swatch.dataset.color;
+                const picker = document.getElementById('canvas-color-picker');
+                if (picker) picker.value = brushColor;
+            });
+        });
+
+        const brushSizeInput = document.getElementById('canvas-brush-size');
+        if (brushSizeInput) {
+            brushSizeInput.addEventListener('input', (e) => {
+                brushSize = e.target.value;
+                document.getElementById('brush-size-label').textContent = brushSize;
+            });
+        }
+
+        document.getElementById('clear-canvas-btn')?.addEventListener('click', () => {
+            ctx.save();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.restore();
+            localStorage.removeItem('nikola_doodle_data');
+        });
+
+        document.getElementById('download-canvas-btn')?.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'nikola-doodle.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+
+        // Quick Box, Future Ideas, Why Good text persistence
+        const quickBox = document.getElementById('quick-box-textarea');
+        const futureIdeas = document.getElementById('future-ideas-textarea');
+        const whyGood = document.getElementById('why-good-textarea');
+
+        if (quickBox) {
+            quickBox.value = state.quickNotes || '';
+            quickBox.addEventListener('input', (e) => {
+                state.quickNotes = e.target.value;
+                saveState();
+            });
+        }
+        if (futureIdeas) {
+            futureIdeas.value = state.futureIdeas || '';
+            futureIdeas.addEventListener('input', (e) => {
+                state.futureIdeas = e.target.value;
+                saveState();
+            });
+        }
+        if (whyGood) {
+            whyGood.value = state.whyGood || '';
+            whyGood.addEventListener('input', (e) => {
+                state.whyGood = e.target.value;
+                saveState();
+            });
+        }
+
+
+        // --- FLAPPY BIRD ARCADE GAME LOGIC (STARTS ONLY ON BUTTON/SPACE PRESS) ---
+        const fbCanvas = document.getElementById('flappy-canvas');
+        const fbCtx = fbCanvas.getContext('2d');
+        const fbOverlay = document.getElementById('fb-overlay');
+        const fbStartBtn = document.getElementById('fb-start-btn');
+        const fbOverlayStart = document.getElementById('fb-overlay-start');
+
+        let fbRunning = false;
+        let fbBird = { x: 50, y: 150, vy: 0, gravity: 0.35, jump: -6.5, radius: 12 };
+        let fbPipes = [];
+        let fbScore = 0;
+        let fbFrame = 0;
+        let fbLoopId = null;
+
+        function resizeFlappyCanvas() {
+            if (!fbCanvas) return;
+            const parent = fbCanvas.parentElement;
+            fbCanvas.width = parent.clientWidth;
+            fbCanvas.height = parent.clientHeight;
+        }
+
+        function initFlappyGame() {
+            resizeFlappyCanvas();
+            fbBird.y = fbCanvas.height / 2;
+            fbBird.vy = 0;
+            fbPipes = [];
+            fbScore = 0;
+            fbFrame = 0;
+            document.getElementById('fb-score').textContent = '0';
+            document.getElementById('fb-high').textContent = state.flappyHighScore || 0;
+        }
+
+        function startFlappyGame() {
+            initFlappyGame();
+            fbRunning = true;
+            fbOverlay.classList.add('hidden');
+            if (fbLoopId) cancelAnimationFrame(fbLoopId);
+            flappyLoop();
+        }
+
+        function flapBird() {
+            if (!fbRunning) {
+                startFlappyGame();
+            } else {
+                fbBird.vy = fbBird.jump;
+            }
+        }
+
+        function flappyLoop() {
+            if (!fbRunning) return;
+
+            fbCtx.clearRect(0, 0, fbCanvas.width, fbCanvas.height);
+            fbFrame++;
+
+            // Draw Background Sky Lines
+            fbCtx.fillStyle = '#7dd3fc';
+            fbCtx.fillRect(0, 0, fbCanvas.width, fbCanvas.height);
+
+            // Bird physics
+            fbBird.vy += fbBird.gravity;
+            fbBird.y += fbBird.vy;
+
+            // Draw Bird
+            fbCtx.fillStyle = '#facc15';
+            fbCtx.beginPath();
+            fbCtx.arc(fbBird.x, fbBird.y, fbBird.radius, 0, Math.PI * 2);
+            fbCtx.fill();
+            fbCtx.strokeStyle = '#854d0e';
+            fbCtx.lineWidth = 2;
+            fbCtx.stroke();
+
+            // Bird Eye
+            fbCtx.fillStyle = '#ffffff';
+            fbCtx.beginPath();
+            fbCtx.arc(fbBird.x + 4, fbBird.y - 3, 4, 0, Math.PI * 2);
+            fbCtx.fill();
+            fbCtx.fillStyle = '#000000';
+            fbCtx.beginPath();
+            fbCtx.arc(fbBird.x + 5, fbBird.y - 3, 2, 0, Math.PI * 2);
+            fbCtx.fill();
+
+            // Spawn Pipes
+            if (fbFrame % 90 === 0) {
+                const gap = 90;
+                const minPipe = 40;
+                const maxPipe = fbCanvas.height - gap - minPipe;
+                const topHeight = Math.floor(Math.random() * (maxPipe - minPipe + 1)) + minPipe;
+                fbPipes.push({
+                    x: fbCanvas.width,
+                    top: topHeight,
+                    bottom: fbCanvas.height - topHeight - gap,
+                    passed: false
+                });
+            }
+
+            // Move & Draw Pipes
+            for (let i = fbPipes.length - 1; i >= 0; i--) {
+                const p = fbPipes[i];
+                p.x -= 2;
+
+                // Pipe Colors
+                fbCtx.fillStyle = '#22c55e';
+                fbCtx.strokeStyle = '#15803d';
+                fbCtx.lineWidth = 2;
+
+                // Top Pipe
+                fbCtx.fillRect(p.x, 0, 42, p.top);
+                fbCtx.strokeRect(p.x, 0, 42, p.top);
+
+                // Bottom Pipe
+                fbCtx.fillRect(p.x, fbCanvas.height - p.bottom, 42, p.bottom);
+                fbCtx.strokeRect(p.x, fbCanvas.height - p.bottom, 42, p.bottom);
+
+                // Score Check
+                if (!p.passed && p.x + 42 < fbBird.x) {
+                    p.passed = true;
+                    fbScore++;
+                    document.getElementById('fb-score').textContent = fbScore;
+                    if (fbScore > (state.flappyHighScore || 0)) {
+                        state.flappyHighScore = fbScore;
+                        document.getElementById('fb-high').textContent = fbScore;
+                        saveState();
+                    }
+                }
+
+                // Collision Detection
+                if (
+                    fbBird.x + fbBird.radius > p.x &&
+                    fbBird.x - fbBird.radius < p.x + 42 &&
+                    (fbBird.y - fbBird.radius < p.top || fbBird.y + fbBird.radius > fbCanvas.height - p.bottom)
+                ) {
+                    gameEndFlappy();
+                    return;
+                }
+
+                // Remove Offscreen Pipes
+                if (p.x < -50) fbPipes.splice(i, 1);
+            }
+
+            // Floor & Ceiling Collision
+            if (fbBird.y + fbBird.radius >= fbCanvas.height || fbBird.y - fbBird.radius <= 0) {
+                gameEndFlappy();
+                return;
+            }
+
+            fbLoopId = requestAnimationFrame(flappyLoop);
+        }
+
+        function gameEndFlappy() {
+            fbRunning = false;
+            fbOverlay.classList.remove('hidden');
+        }
+
+        if (fbStartBtn) fbStartBtn.addEventListener('click', startFlappyGame);
+        if (fbOverlayStart) fbOverlayStart.addEventListener('click', startFlappyGame);
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                const activeTab = document.querySelector('.nav-tab.active-tab')?.dataset.target;
+                if (activeTab === 'tab-notebook') {
+                    e.preventDefault();
+                    flapBird();
+                }
+            }
+        });
+
+
+        // --- PAGE 5: N'S SETTINGS LOGIC ---
+        function renderSettings() {
+            const mainDriveInput = document.getElementById('settings-main-drive');
+            const shareInput = document.getElementById('share-link-input');
+
+            if (mainDriveInput) mainDriveInput.value = state.mainDriveUrl || '';
+            if (shareInput) shareInput.value = window.location.href;
+        }
+
+        document.getElementById('save-settings-drive-btn')?.addEventListener('click', () => {
+            const mainDriveInput = document.getElementById('settings-main-drive');
+            if (mainDriveInput && mainDriveInput.value.trim()) {
+                state.mainDriveUrl = mainDriveInput.value.trim();
+                saveState();
+                alert('Main Google Drive Link saved!');
+            }
+        });
+
+        document.getElementById('copy-share-btn')?.addEventListener('click', () => {
+            const shareInput = document.getElementById('share-link-input');
+            if (shareInput) {
+                shareInput.select();
+                document.execCommand('copy');
+                alert('Website URL copied to clipboard!');
+            }
+        });
+
+        document.getElementById('reset-workspace-btn')?.addEventListener('click', () => {
+            if (confirm('Are you sure you want to reset all workspace data to defaults?')) {
+                localStorage.removeItem('nikola_workspace_state');
+                localStorage.removeItem('nikola_doodle_data');
+                state = DEFAULT_STATE;
+                saveState();
+                location.reload();
+            }
+        });
+
+
+        // --- HELPER UTILITIES ---
+        function getStatusBadgeClass(status) {
+            switch (status) {
+                case 'Planning': return 'bg-amber-100 text-amber-800';
+                case 'Building': return 'bg-sky-100 text-sky-800';
+                case 'Publish': return 'bg-emerald-100 text-emerald-800';
+                case 'Help': return 'bg-purple-100 text-purple-800';
+                case 'Stuck': return 'bg-rose-100 text-rose-800';
+                case 'Extra Help': return 'bg-indigo-100 text-indigo-800';
+                default: return 'bg-slate-100 text-slate-700';
+            }
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function renderAll() {
+            renderHome();
+            renderTasks();
+            renderSettings();
+        }
+
+        // --- GLOBAL SEARCH SHORTCUT ---
+        document.getElementById('global-search')?.addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase();
+            if (!q) return;
+
+            // Highlight search matching tasks
+            document.querySelectorAll('#todo-tasks-list > div, #done-tasks-list > div').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(q) ? 'flex' : 'none';
+            });
+        });
+
+        // --- APP BOOTSTRAP ---
+        window.onload = () => {
+            renderAll();
+            setupCanvasResolution();
+            resizeFlappyCanvas();
+        };
+    </script>
+</body>
+</html></pre>
+        </body>
+    </html>
